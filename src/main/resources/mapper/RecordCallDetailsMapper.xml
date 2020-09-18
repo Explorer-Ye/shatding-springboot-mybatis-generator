@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anthony.shatdingspringbootmybatisgenerator.mapper.RecordCallDetailsMapper">
+  <resultMap id="BaseResultMap" type="com.anthony.shatdingspringbootmybatisgenerator.entity.RecordCallDetails">
+    <id column="session_key" jdbcType="VARCHAR" property="sessionKey" />
+    <result column="session_source" jdbcType="TINYINT" property="sessionSource" />
+    <result column="session_begin_time" jdbcType="TIMESTAMP" property="sessionBeginTime" />
+    <result column="external_no" jdbcType="VARCHAR" property="externalNo" />
+    <result column="internal_no" jdbcType="VARCHAR" property="internalNo" />
+    <result column="seat_number" jdbcType="VARCHAR" property="seatNumber" />
+    <result column="direction" jdbcType="TINYINT" property="direction" />
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+    <result column="group_id" jdbcType="VARCHAR" property="groupId" />
+    <result column="task_id" jdbcType="VARCHAR" property="taskId" />
+    <result column="session_status" jdbcType="TINYINT" property="sessionStatus" />
+    <result column="session_reslut" jdbcType="TINYINT" property="sessionReslut" />
+    <result column="duration" jdbcType="BIGINT" property="duration" />
+    <result column="failure_cause" jdbcType="TINYINT" property="failureCause" />
+    <result column="task_key" jdbcType="VARCHAR" property="taskKey" />
+    <result column="record_url" jdbcType="VARCHAR" property="recordUrl" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    session_key, session_source, session_begin_time, external_no, internal_no, seat_number, 
+    direction, tenant_id, group_id, task_id, session_status, session_reslut, duration, 
+    failure_cause, task_key, record_url
+  </sql>
+  <select id="selectByExample" parameterType="com.anthony.shatdingspringbootmybatisgenerator.entity.RecordCallDetailsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from record_call_details
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from record_call_details
+    where session_key = #{sessionKey,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from record_call_details
+    where session_key = #{sessionKey,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.anthony.shatdingspringbootmybatisgenerator.entity.RecordCallDetailsExample">
+    delete from record_call_details
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.anthony.shatdingspringbootmybatisgenerator.entity.RecordCallDetails">
+    insert into record_call_details (session_key, session_source, session_begin_time, 
+      external_no, internal_no, seat_number, 
+      direction, tenant_id, group_id, 
+      task_id, session_status, session_reslut, 
+      duration, failure_cause, task_key, 
+      record_url)
+    values (#{sessionKey,jdbcType=VARCHAR}, #{sessionSource,jdbcType=TINYINT}, #{sessionBeginTime,jdbcType=TIMESTAMP}, 
+      #{externalNo,jdbcType=VARCHAR}, #{internalNo,jdbcType=VARCHAR}, #{seatNumber,jdbcType=VARCHAR}, 
+      #{direction,jdbcType=TINYINT}, #{tenantId,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, 
+      #{taskId,jdbcType=VARCHAR}, #{sessionStatus,jdbcType=TINYINT}, #{sessionReslut,jdbcType=TINYINT}, 
+      #{duration,jdbcType=BIGINT}, #{failureCause,jdbcType=TINYINT}, #{taskKey,jdbcType=VARCHAR}, 
+      #{recordUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.anthony.shatdingspringbootmybatisgenerator.entity.RecordCallDetails">
+    insert into record_call_details
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sessionKey != null">
+        session_key,
+      </if>
+      <if test="sessionSource != null">
+        session_source,
+      </if>
+      <if test="sessionBeginTime != null">
+        session_begin_time,
+      </if>
+      <if test="externalNo != null">
+        external_no,
+      </if>
+      <if test="internalNo != null">
+        internal_no,
+      </if>
+      <if test="seatNumber != null">
+        seat_number,
+      </if>
+      <if test="direction != null">
+        direction,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="sessionStatus != null">
+        session_status,
+      </if>
+      <if test="sessionReslut != null">
+        session_reslut,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="failureCause != null">
+        failure_cause,
+      </if>
+      <if test="taskKey != null">
+        task_key,
+      </if>
+      <if test="recordUrl != null">
+        record_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sessionKey != null">
+        #{sessionKey,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionSource != null">
+        #{sessionSource,jdbcType=TINYINT},
+      </if>
+      <if test="sessionBeginTime != null">
+        #{sessionBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="externalNo != null">
+        #{externalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="internalNo != null">
+        #{internalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="seatNumber != null">
+        #{seatNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="direction != null">
+        #{direction,jdbcType=TINYINT},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionStatus != null">
+        #{sessionStatus,jdbcType=TINYINT},
+      </if>
+      <if test="sessionReslut != null">
+        #{sessionReslut,jdbcType=TINYINT},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=BIGINT},
+      </if>
+      <if test="failureCause != null">
+        #{failureCause,jdbcType=TINYINT},
+      </if>
+      <if test="taskKey != null">
+        #{taskKey,jdbcType=VARCHAR},
+      </if>
+      <if test="recordUrl != null">
+        #{recordUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.anthony.shatdingspringbootmybatisgenerator.entity.RecordCallDetailsExample" resultType="java.lang.Long">
+    select count(*) from record_call_details
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update record_call_details
+    <set>
+      <if test="record.sessionKey != null">
+        session_key = #{record.sessionKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sessionSource != null">
+        session_source = #{record.sessionSource,jdbcType=TINYINT},
+      </if>
+      <if test="record.sessionBeginTime != null">
+        session_begin_time = #{record.sessionBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.externalNo != null">
+        external_no = #{record.externalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.internalNo != null">
+        internal_no = #{record.internalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seatNumber != null">
+        seat_number = #{record.seatNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.direction != null">
+        direction = #{record.direction,jdbcType=TINYINT},
+      </if>
+      <if test="record.tenantId != null">
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupId != null">
+        group_id = #{record.groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskId != null">
+        task_id = #{record.taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sessionStatus != null">
+        session_status = #{record.sessionStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.sessionReslut != null">
+        session_reslut = #{record.sessionReslut,jdbcType=TINYINT},
+      </if>
+      <if test="record.duration != null">
+        duration = #{record.duration,jdbcType=BIGINT},
+      </if>
+      <if test="record.failureCause != null">
+        failure_cause = #{record.failureCause,jdbcType=TINYINT},
+      </if>
+      <if test="record.taskKey != null">
+        task_key = #{record.taskKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recordUrl != null">
+        record_url = #{record.recordUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update record_call_details
+    set session_key = #{record.sessionKey,jdbcType=VARCHAR},
+      session_source = #{record.sessionSource,jdbcType=TINYINT},
+      session_begin_time = #{record.sessionBeginTime,jdbcType=TIMESTAMP},
+      external_no = #{record.externalNo,jdbcType=VARCHAR},
+      internal_no = #{record.internalNo,jdbcType=VARCHAR},
+      seat_number = #{record.seatNumber,jdbcType=VARCHAR},
+      direction = #{record.direction,jdbcType=TINYINT},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      group_id = #{record.groupId,jdbcType=VARCHAR},
+      task_id = #{record.taskId,jdbcType=VARCHAR},
+      session_status = #{record.sessionStatus,jdbcType=TINYINT},
+      session_reslut = #{record.sessionReslut,jdbcType=TINYINT},
+      duration = #{record.duration,jdbcType=BIGINT},
+      failure_cause = #{record.failureCause,jdbcType=TINYINT},
+      task_key = #{record.taskKey,jdbcType=VARCHAR},
+      record_url = #{record.recordUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.anthony.shatdingspringbootmybatisgenerator.entity.RecordCallDetails">
+    update record_call_details
+    <set>
+      <if test="sessionSource != null">
+        session_source = #{sessionSource,jdbcType=TINYINT},
+      </if>
+      <if test="sessionBeginTime != null">
+        session_begin_time = #{sessionBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="externalNo != null">
+        external_no = #{externalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="internalNo != null">
+        internal_no = #{internalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="seatNumber != null">
+        seat_number = #{seatNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="direction != null">
+        direction = #{direction,jdbcType=TINYINT},
+      </if>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionStatus != null">
+        session_status = #{sessionStatus,jdbcType=TINYINT},
+      </if>
+      <if test="sessionReslut != null">
+        session_reslut = #{sessionReslut,jdbcType=TINYINT},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=BIGINT},
+      </if>
+      <if test="failureCause != null">
+        failure_cause = #{failureCause,jdbcType=TINYINT},
+      </if>
+      <if test="taskKey != null">
+        task_key = #{taskKey,jdbcType=VARCHAR},
+      </if>
+      <if test="recordUrl != null">
+        record_url = #{recordUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where session_key = #{sessionKey,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.anthony.shatdingspringbootmybatisgenerator.entity.RecordCallDetails">
+    update record_call_details
+    set session_source = #{sessionSource,jdbcType=TINYINT},
+      session_begin_time = #{sessionBeginTime,jdbcType=TIMESTAMP},
+      external_no = #{externalNo,jdbcType=VARCHAR},
+      internal_no = #{internalNo,jdbcType=VARCHAR},
+      seat_number = #{seatNumber,jdbcType=VARCHAR},
+      direction = #{direction,jdbcType=TINYINT},
+      tenant_id = #{tenantId,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=VARCHAR},
+      task_id = #{taskId,jdbcType=VARCHAR},
+      session_status = #{sessionStatus,jdbcType=TINYINT},
+      session_reslut = #{sessionReslut,jdbcType=TINYINT},
+      duration = #{duration,jdbcType=BIGINT},
+      failure_cause = #{failureCause,jdbcType=TINYINT},
+      task_key = #{taskKey,jdbcType=VARCHAR},
+      record_url = #{recordUrl,jdbcType=VARCHAR}
+    where session_key = #{sessionKey,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,86 @@
+package com.anthony.shatdingspringbootmybatisgenerator.controller;
+
+import com.anthony.shatdingspringbootmybatisgenerator.entity.CallDetails;
+import com.anthony.shatdingspringbootmybatisgenerator.entity.RecordCallDetails;
+import com.anthony.shatdingspringbootmybatisgenerator.service.CallDetailsService;
+import com.anthony.shatdingspringbootmybatisgenerator.service.RecordCallDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
+
+/**
+ * @Author yebicheng
+ * @create 2020/9/15 15:19
+ */
+
+@RestController
+@RequestMapping("/test")
+public class ShardingTest {
+
+    @Autowired
+    private CallDetailsService  callDetailsService;
+
+    @Autowired
+    private RecordCallDetailsService recordCallDetailsService;
+
+    @GetMapping("/add")
+    public void add(){
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 1000000; i++) {
+                    CallDetails callDetails = new CallDetails();
+                    callDetails.setSessionKey(UUID.randomUUID().toString().replace("-",""));
+                    callDetails.setSide((byte) i);
+                    callDetails.setElapsedTime(Math.abs(new Random().nextInt()));
+                    callDetails.setReslutText("测试"+i);
+                    callDetailsService.add(callDetails);
+                }
+            }
+        };
+        new Thread(r).start();
+        System.out.println("over");
+    }
+
+
+    @GetMapping("list")
+    public List<CallDetails> get(){
+        return callDetailsService.get();
+    }
+
+    @PostMapping("/addTwoTables")
+    public void addTwo(){
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 10000; i++) {
+                    RecordCallDetails recordCallDetails = new RecordCallDetails();
+                    String sessionKey = UUID.randomUUID().toString().replace("-","");
+                    recordCallDetails.setSessionKey(sessionKey);
+                    recordCallDetails.setDirection((byte) (i%2));
+                    recordCallDetails.setDuration(Math.abs(new Random().nextLong()));
+                    recordCallDetails.setExternalNo("test");
+                    recordCallDetails.setRecordUrl("http://www.baidu.com");
+                    recordCallDetails.setTaskId(UUID.randomUUID().toString().replace("-",""));
+                    recordCallDetailsService.addTwo(recordCallDetails);
+                    for(int j =0;j<10;j++){
+                        CallDetails callDetails = new CallDetails();
+                        callDetails.setSessionKey(sessionKey);
+                        callDetails.setElapsedTime(Math.abs(new Random().nextInt()));
+                        callDetails.setReslutText("测试"+j);
+                        callDetailsService.add(callDetails);
+                    }
+                }
+            }
+        };
+        new Thread(r).start();
+        System.out.println("over");
+    }
+
+}
