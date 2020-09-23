@@ -3,6 +3,7 @@ package com.anthony.shatdingspringbootmybatisgenerator.service;
 import com.anthony.shatdingspringbootmybatisgenerator.entity.CallDetails;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author yebicheng
@@ -13,5 +14,7 @@ public interface CallDetailsService {
     void add(CallDetails detail);
 
     List<CallDetails> get();
+
+    List<Map> getCallInfo(String sessionKey);
 
 }

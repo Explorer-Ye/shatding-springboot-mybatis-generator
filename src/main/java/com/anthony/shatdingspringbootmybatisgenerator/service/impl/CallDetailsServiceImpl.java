@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author yebicheng
@@ -34,5 +35,10 @@ public class CallDetailsServiceImpl implements CallDetailsService {
         example.setOrderByClause("reslut_text asc");
         PageHelper.startPage(2,5);
         return callDetailsMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<Map> getCallInfo(String sessionKey) {
+        return callDetailsMapper.getCallInfo(sessionKey);
     }
 }

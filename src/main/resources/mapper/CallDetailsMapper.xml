@@ -196,4 +196,11 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+  <select id="getCallInfo" parameterType="string" resultType="map">
+    select cs.session_key "jobId",sad.side "sender",cs.session_begin_time "beginTime",cs.record_url,
+        sad.begin_time "addTime",sad.reslut_text "context",sad.side_index
+        from record_call_details cs left join call_details sad on sad.session_key = cs.session_key
+        where cs.session_key = #{sessionKey} order by addTime,side_index
+  </select>
 </mapper>

@@ -3,6 +3,7 @@ package com.anthony.shatdingspringbootmybatisgenerator.mapper;
 import com.anthony.shatdingspringbootmybatisgenerator.entity.CallDetails;
 import com.anthony.shatdingspringbootmybatisgenerator.entity.CallDetailsExample;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -22,4 +23,6 @@ public interface CallDetailsMapper {
     int updateByExampleSelective(@Param("record") CallDetails record, @Param("example") CallDetailsExample example);
 
     int updateByExample(@Param("record") CallDetails record, @Param("example") CallDetailsExample example);
+
+    List<Map> getCallInfo(@Param("sessionKey") String sessionKey);
 }
